@@ -1,0 +1,19 @@
+/* div{
+    width: 100%;
+    background-color: bisque;
+}
+ */
+#chat_list{
+    display:grid;  
+    grid-template-columns: auto auto auto;
+    gap:10px;   
+}
+
+.message {
+    background-color: darkseagreen;
+    grid-column: 1/span 2;
+  }
+.myMessage {
+    background-color: cadetblue;
+    grid-column: 2/span 2;
+  }

@@ -6,25 +6,24 @@ const cartCollection = "carts"
 const cartSchema = new mongoose.Schema({
     _id:{type:String, default:randomUUID},
     products:{
-        type:[
-                {
-                    product:{type:String,
-                            ref:'products'},
-                    counter:{type:Number,min:1}
-                }
-            ]
-
-        }
+        type:[{
+                _id: false,
+                product:{type:String,
+                        ref:'products'},
+                counter:{type:Number,min:1}
+                }],
+        default:[]
+        },
 }, {
     strict: 'throw',
     versionKey: false
 })
 
-/* 
+
 cartSchema.pre('find',function(next){
     this.populate('products.product')
     next()
-}) */
+})
 
 
 /* cartSchema.statics.newMultiplecarts= async function  (prodArr){
@@ -37,11 +36,13 @@ cartSchema.pre('find',function(next){
     }
     return result
 }
+*/
 
+/*
 cartSchema.statics.loadProducts= async function  (products){
     this.products = products
-    this.save() */
-/*     let result = []
+    this.save() 
+    let result = []
     for (const prod of prodArr) {
         const newCart = new this(prod )
         await newCart.save()

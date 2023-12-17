@@ -26,3 +26,8 @@
 |method|url|json|detaill|
 |-|-|-|-|
 |**get**|*web/carts/:cid/*|-|vista para presentar visualmente los carritos de ese carro|
+
+
+---
+
+generar enlace a products

@@ -84,8 +84,18 @@ router.get('/populate',async(req,res)=>{
 })
 
 
+//traer todos los carritos
+router.get('/',async (req,res)=>{
+  try{
+      let carts= await cartDao.find().lean()
+      res.send({result:'succes',payload:carts})
+  }catch(error){
+      console.log(`MongoDB: cannot get carts \n ERROR: ${error}`)
+  }
+})
 
 
+//traer los productos del carrito
 router.get('/:cid',async (req,res)=>{
     let {cid} = req.params
 
@@ -97,15 +107,6 @@ router.get('/:cid',async (req,res)=>{
     }
 })
 
-
-router.get('/',async (req,res)=>{
-    try{
-        let carts= await cartDao.find().lean()
-        res.send({result:'succes',payload:carts})
-    }catch(error){
-        console.log(`MongoDB: cannot get carts \n ERROR: ${error}`)
-    }
-})
 
 // agregar/actualizar producto con una cantidad counter
 router.put('/:cid/products/:pid',async (req,res)=>{
@@ -155,7 +156,6 @@ router.delete('/:cid/products/:pid',async (req,res)=>{
       console.log(`MongoDB: cannot get carts \n ERROR: ${error}`)
   }
 })
-
 
 
 //vacia el products de carrito

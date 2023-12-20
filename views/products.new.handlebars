@@ -1,0 +1,61 @@
+<form action="" method="get">
+    <h4>Buscador:</h4>
+    <label for="">Nombre:<input type="text" name="" id=""></label>
+    
+    <label for="">Cantidad<input type="number" name="" id="" min="1" max="20"></label>
+    <div class="">
+        <span>Orden: </span>
+        <label for="">Descendente<input type="radio" name="" id=""></label>
+        <label for="">Ascendente<input type="radio" name="" id=""></label>
+    </div>    
+    <input type="submit" name="" id="" value="Buscar">
+</form>
+<div class="" id="pages">
+
+    {{totalDocs}} documentos encontrados <br>
+
+    
+    <div id="links"  style="display:flex; gap: 10px; margin: 10px;"
+        data-lala="a" 
+        data-total="{{totalPages}}" 
+        data-actual="{{page}}"
+        data-limit="{{limit}}"
+        {{#if hasPrevPage}}
+            data-prev="{{prevPage}}"
+        {{/if }}
+        {{#if hasNextPage}}
+            data-next="{{nextPage}}"
+        {{/if }}
+        >
+        
+        
+    </div>
+<hr>
+</div>
+<div class="" id="mainBox" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+{{!--     {{#each docs}}
+        {{this}}
+    {{/each}} --}}
+    {{#each docs}}
+            <div class="" id="" style="border: solid black 2px">
+                <a href="http://localhost:8080/products/{{this._id}}">
+                    <strong>{{this.title}}</strong>
+                </a>
+
+                <p><strong>Codigo:</strong>{{this.code}}</p>
+                <p><strong>Categoria:</strong>{{this.category}}</p>
+                <p><strong>Precio:</strong>${{this.price}}</p>
+                <p>{{this.description}}</p>
+                <div class="" id="">
+                    <form  method="post">
+                        <input type="hidden" name="" value="{{this._id}}">
+                        <input type="submit" value="Agregar a Carrito">
+                    </form>
+                </div>
+            </div>
+
+    {{/each}}
+</div>
+
+{{!-- <script src="/socket.io/socket.io.js"></script> --}}
+<script src="/statics/js/productPaginate.client.js"></script>

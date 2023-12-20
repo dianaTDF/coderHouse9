@@ -11,6 +11,19 @@ router.use('/chat',(req,res)=>{
 })
 
 
+router.use('/products/:pid', async (req,res)=>{
+    const  {pid}= req.params
+    try {
+        const product = await productDao.findById(pid)
+        res.render('products.show.handlebars',{title:'Ver roducto',producto:product})
+    } catch (error) {
+        res.status(404).send({result:'error'})
+        console.log(`MongoDB: couldn't update product ${title} \n ERROR: ${error}`)
+    }
+    
+})
+
+
 router.use('/products', async (req,res)=>{
 
     const  {limit=10, page=1, sort, query} = req.query 
@@ -45,3 +58,4 @@ router.use('/',(req,res)=>{
 })
 /* router.use('/cart',cartRouter)
 router.use('/product',productRouter) */
+

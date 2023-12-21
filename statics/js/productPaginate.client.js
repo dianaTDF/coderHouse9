@@ -1,3 +1,21 @@
+const socket = io()
+/* import { cartDao } from "../../src/daos/dao" */
+
+/* 
+window.addEventListener("load", function (event) {
+    console.log("'Todos los recursos terminaron de cargar!");
+  });
+ */
+function addItem(event){
+    event.preventDefault()
+
+    const form =event.target
+    
+    const pid=form.querySelector('input[type="hidden"]').value
+    socket.emit('addProduct',pid)
+}
+/* ---------------------- carga y gestion de productos ---------------------- */
+/* ------------------------ administracion de paginas ----------------------- */
 const linksDiv = document.getElementById('links')
 const totalPage= linksDiv.dataset.total
 const limit= linksDiv.dataset.limit
@@ -30,6 +48,9 @@ if(nextPage){
     nextLink.textContent = 'Siguientes';
     linksDiv.appendChild(nextLink);
 }
+
+
+
 
 /* const fristLink =document.getElementById('first')
 const lastLink = document.getElementById('last')

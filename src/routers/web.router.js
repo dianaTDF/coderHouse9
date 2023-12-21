@@ -2,7 +2,7 @@ import Router from 'express'
 /* import {router as messageRouter} from './message.router.js'
 import {router as cartRouter} from './cart.router.js'
 import {router as productRouter} from './product.router.js' */
-import { productDao } from '../daos/dao/index.js'
+import { cartDao, productDao } from '../daos/dao/index.js'
 
 export const router = Router()
 
@@ -47,10 +47,11 @@ router.use('/products', async (req,res)=>{
 
 
     const result = await productDao.paginate(title, seachOptions)
+    const newCart= await cartDao.create()///acgregar el id del carrito para que aparezca en la vista products
     
-    console.log(result)
+    
     //res.json({title:'productos', ...result})
-    res.render('products.new.handlebars',{title:'productos', ...result})
+    res.render('products.new.handlebars',{title:'productos', ...result, })
 })
 
 router.use('/',(req,res)=>{

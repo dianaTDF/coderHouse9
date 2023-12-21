@@ -26,9 +26,9 @@ userLogForm.addEventListener('submit',(event)=>{
 
 })
 
-window.onload=()=>{
+/* window.onload=()=>{
     checkLog()
-}
+} */
 
 
 /* ---------------------------- listar mensajes ---------------------------- */

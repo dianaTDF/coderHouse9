@@ -5,6 +5,10 @@ export function onConnection(socketServer){
 
         console.log(`${socket.id} conected`)
 
+        /* -------------------------------------------------------------------------- */
+        /*                                      /                                     */
+        /* -------------------------------------------------------------------------- */
+        
         /* ----------------------- mostrar lista de productos ----------------------- */
         try {
             socketServer.emit('prodList',await productDao.find())
@@ -81,6 +85,15 @@ export function onConnection(socketServer){
                 console.log(`Error al ingresar mensaje, avisando a usuario`)                        
                 socket.emit('errorMessage',{message:`Su mensaje no ha ingresado`})
             }           
+        })
+
+
+
+        /* -------------------------------------------------------------------------- */
+        /*                                 /products/                                 */
+        /* -------------------------------------------------------------------------- */
+        socket.on('addProduct',async (pid)=>{
+            
         })
 
     }

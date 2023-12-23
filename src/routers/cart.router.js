@@ -127,7 +127,7 @@ router.put('/:cid/products/:pid',async (req,res)=>{
           { $push: { products: { product: pid, counter: counter} } })
 
         if(!cart){
-          res.send({result:'error',message:"el carrito no se encuentra en el carrito, no es posible actualizar"})
+          res.send({result:'error',message:"el carrito no se encuentra, no es posible actualizar"})
         }
       }
 

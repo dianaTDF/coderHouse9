@@ -1,14 +1,14 @@
-<a href="../carts/{{cart}}" data-cart="{{cart}}" id=""><button class="" id="">Ir a Carrito</button></a>
-
-<form action="" method="get">
+<div class="" id="navPrototype"></div>
+<hr>
+<form action="" method="GET">
     <h4>Buscador:</h4>
-    <label for="">Nombre:<input type="text" name="" id=""></label>
+    <label for="">Nombre:<input type="text" name="query" id=""></label>
     
-    <label for="">Cantidad<input type="number" name="" id="" min="1" max="20"></label>
+    <label for="">limite:<input type="number" name="limit" id="" min="1" max="20"></label>
     <div class="">
         <span>Orden: </span>
-        <label for="">Descendente<input type="radio" name="" id=""></label>
-        <label for="">Ascendente<input type="radio" name="" id=""></label>
+        <label for="">Descendente<input type="radio" value="desc" name="sort" id=""></label>
+        <label for="">Ascendente<input type="radio" value="asc" name="sort" id=""></label>
     </div>    
     <input type="submit" name="" id="" value="Buscar">
 </form>
@@ -18,7 +18,14 @@
 
     
     <div id="links"  style="display:flex; gap: 10px; margin: 10px;"
-        data-lala="a" 
+        {{#if hasTitle}}
+            data-title="{{title}}"
+        {{/if }}
+        {{#if hasSort}}
+            data-sort="{{sort}}"
+        {{/if }}
+
+        data-title={{totalPages}} 
         data-total="{{totalPages}}" 
         data-actual="{{page}}"
         data-limit="{{limit}}"

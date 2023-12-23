@@ -1,4 +1,4 @@
-import { productDao, messageDao } from "../daos/dao/index.js"
+import { productDao, messageDao, cartDao } from "../daos/dao/index.js"
 
 export function onConnection(socketServer){
     return async function (socket){
@@ -93,8 +93,55 @@ export function onConnection(socketServer){
         /*                                 /products/                                 */
         /* -------------------------------------------------------------------------- */
         socket.on('addProduct',async (pid)=>{
-            
+            console.log('hola')
+            if (!socket.cart){
+                
+                const newCart = await cartDao.create({})
+                console.log(newCart)
+
+                socket.cart = newCart._id
+            }
+
+            try {
+
+                /*            
+                    const cart = await cartDao.findOneAndUpdate( // faaa, es demasiado personalizable esto
+                    { _id: socket.cart, 'products.product': pid },
+                    { $inc: { 'products.$.counter': 1 }, 
+                    $setOnInsert: { 'products.$': { product: pid, counter: 1 } } },
+                    { new: true, upsert: true }
+                    ) 
+
+                    no consegui hacer que andara, me tirara error
+                    TypeError [ERR_INVALID_ARG_TYPE]: The "options" argument must be of type object. Received null
+                */
+                
+                let cart = await cartDao.findOne({ _id: socket.cart, 'products.product': pid })
+                
+                //console.log(cart)
+                    if(!cart){                    
+                    cart= await cartDao.findByIdAndUpdate({_id:socket.cart},
+                        { $push: { products: { product: pid, counter: 1} } },
+                        { new: true })  
+                    }else{
+                    cart = await cartDao.findOneAndUpdate(
+                        { _id: socket.cart, 'products.product': pid },
+                        { $inc: { 'products.$.counter': 1 } },
+                        { new: true }
+                        );
+                    }
+
+                console.log(cart)
+                socket.emit('checkCart',socket.cart)
+
+            } catch (error) {
+
+                console.log(error)                    
+                socket.emit('errorMessage',{message:`no se ha agregado el producto a su carrito`})
+            }
+
         })
+
 
     }
 

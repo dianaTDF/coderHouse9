@@ -1,0 +1,18 @@
+<a href="../products">volver</a>
+{{#each cart.products}}
+
+<div class="" id="" style="border: solid black 2px">
+    <a href="http://localhost:8080/products/{{this.product._id}}">
+        <strong>{{this.product.title}}</strong>
+    </a>
+    <br>
+    <strong>CANTIDAD EN EL CARRITO:{{this.counter}}</strong>
+    <br>
+    <br>
+    <p><strong>Codigo:</strong>{{this.product.code}}</p>
+    <p><strong>Categoria:</strong>{{this.product.category}}</p>
+    <p><strong>Precio:</strong>${{this.product.price}}</p>
+    <p>{{this.product.description}}</p>
+</div>
+
+{{/each}}
